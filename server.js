@@ -68,13 +68,16 @@ app.post('api/notes', (req, res) => {
           res.status(500).json({ error: 'Internal Server Error' });
           return;
         }
-        
-      })
-    }
 
-    
-  })
-})
+        console.log('New note added: ', newNote);
+        res.status(201).json(newNote);
+      });
+    } catch (error) {
+      console.error('Error parsing JSON data: ', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+});
 
 
 app.get('*', (req, res) => 
