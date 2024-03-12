@@ -17,7 +17,11 @@ app.get('/notes', (req, res) =>
 
 
 app.get('/api/notes', (req, res) => {
-  fs.readFile(path.join(__dirname, 'db.json'), 'utf8', (err, data) => {})
+  fs.readFile(path.join(__dirname, 'db.json'), 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading db.json file: ', err);
+    }
+  })
 })
 
 
