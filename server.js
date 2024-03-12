@@ -44,7 +44,14 @@ app.post('api/notes', (req, res) => {
     res.status(400).json({ error: 'Title and text are required fields' });
     return;
   }
-  
+  fs.readFile(path.join(__dirname, 'db.json'), 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading db.json file: ', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    
+  })
 })
 
 
