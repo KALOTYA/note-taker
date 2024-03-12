@@ -55,14 +55,21 @@ app.post('api/notes', (req, res) => {
     try {
       const notes = JSON.parse(data);
       const newNote = {
-        id: ,
+        id: generateUniqueId(),
         title,
         text
       };
 
       notes.push(newNote);
 
-
+      fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(notes), (err) => {
+        if (err) {
+          console.error('Error writing to db.json file: ', err);
+          res.status(500).json({ error: 'Internal Server Error' });
+          return;
+        }
+        
+      })
     }
 
     
