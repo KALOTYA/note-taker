@@ -35,6 +35,11 @@ app.get('/api/notes', (req, res) => {
 });
 
 
+app.post('api/notes', (req, res) => {
+  console.info('POST request recieved to add a new note');
+})
+
+
 app.get('*', (req, res) => 
     res.sendFile(path.join(__dirname, '/public/index.html'))
 );
