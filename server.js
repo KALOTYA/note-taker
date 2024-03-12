@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
+
 const PORT = 3001;
 
 const app = express();
@@ -50,6 +51,20 @@ app.post('api/notes', (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
       return;
     }
+
+    try {
+      const notes = JSON.parse(data);
+      const newNote = {
+        id: ,
+        title,
+        text
+      };
+
+      notes.push(newNote);
+
+
+    }
+
     
   })
 })
