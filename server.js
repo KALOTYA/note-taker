@@ -15,6 +15,12 @@ app.get('/notes', (req, res) =>
   res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
+
+app.get('/api/notes', (req, res) => {
+  fs.readFile(path.join(__dirname, 'db.json'), 'utf8', (err, data) => {})
+})
+
+
 app.get('*', (req, res) => 
     res.sendFile(path.join(__dirname, '/public/index.html'))
 );
