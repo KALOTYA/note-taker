@@ -36,7 +36,7 @@ app.get('/api/notes', (req, res) => {
 });
 
 
-app.post('api/notes', (req, res) => {
+app.post('/api/notes', (req, res) => {
   console.info('POST request recieved to add a new note');
 
   const { title, text } = req.body;
