@@ -25,17 +25,9 @@ app.get('/api/notes', (req, res) => {
   fs.readFile(path.join(__dirname, 'db.json'), 'utf8', (err, data) => {
     if (err) {
       console.error('Error reading db.json file: ', err);
-      res.status(500).json({ error: 'Internal Server Error' });
-      return;
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
-
-    try {
-      const notes = JSON.parse(data);
-      res.json(notes);
-    } catch (error) {
-      console.error('Error pasrsing JSON data: ', error);
-      res.status(500).json({ error: 'Tnternal Server Error' });
-    }
+    res.json(JSON.parse(data));
   });
 });
 
