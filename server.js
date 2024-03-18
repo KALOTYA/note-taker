@@ -33,47 +33,38 @@ app.get('/api/notes', (req, res) => {
 
 
 app.post('/api/notes', (req, res) => {
-  console.info('POST request recieved to add a new note');
+  console.info('POST request received to add a new note');
 
   const { title, text } = req.body;
-  
   if (!title || !text) {
-    res.status(400).json({ error: 'Title and text are required fields' });
-    return;
+    return res.status(400).json({ error: 'Title and text are required fields' });
   }
+
   fs.readFile(path.join(__dirname, 'db.json'), 'utf8', (err, data) => {
     if (err) {
       console.error('Error reading db.json file: ', err);
-      res.status(500).json({ error: 'Internal Server Error' });
-      return;
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
 
-    try {
-      const notes = JSON.parse(data);
-      const newNote = {
-        id: generateUniqueId(),
-        title,
-        text
-      };
+    const notes = JSON.parse(data);
+    const newNote = {
+      id: generateUniqueId(),
+      title,
+      text
+    };
 
-      notes.push(newNote);
+    notes.push(newNote);
 
-      fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(notes), (err) => {
-        if (err) {
-          console.error('Error writing to db.json file: ', err);
-          res.status(500).json({ error: 'Internal Server Error' });
-          return;
-        }
-
-        console.log('New note added: ', newNote);
-        res.status(201).json(newNote);
-      });
-    } catch (error) {
-      console.error('Error parsing JSON data: ', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
+    fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(notes), (err) => {
+      if (err) {
+        console.error('Error writing to db.json file: ', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+      console.log('New note added: ', newNote);
+      res.status(201).json(newNote);
+    });
   });
-});
+})
 
 
 app.get('*', (req, res) => 
