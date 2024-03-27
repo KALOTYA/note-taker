@@ -46,7 +46,7 @@ To use the Note Taker, follow these steps:
    ```
 2. **Navigate to the Project Directory**: Change your current directory to the Logo Generator project directory.
     ```bash
-    cd logo-generator
+    cd note-taker
     ```
 3. **Verify npm Installation**: If Node.js is installed, this command will display its version number. If not, you need to install Node.js from the official website.
     ```bash
