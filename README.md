@@ -40,7 +40,7 @@ Note Taker is an intuitive web application designed to simplify the process of o
 
 To use the Note Taker, follow these steps:
 
-1. **Clone the Repository**: Clone the README Generator repository to your local machine using Git.
+1. **Clone the Repository**: Clone the Note-Taker repository to your local machine using Git.
    ```bash
    git clone https://github.com/yourusername/note-taker.git
    ```
