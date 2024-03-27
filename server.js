@@ -1,9 +1,9 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const generateUniqueId = require('./helpers/uuid');
+const generateUniqueId = require('./helper/uuid');
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
@@ -22,7 +22,7 @@ app.get('/notes', (req, res) =>
 
 
 app.get('/api/notes', (req, res) => {
-  fs.readFile(path.join(__dirname, 'db.json'), 'utf8', (err, data) => {
+  fs.readFile(path.join(__dirname, '/db/db.json'), 'utf8', (err, data) => {
     if (err) {
       console.error('Error reading db.json file: ', err);
       return res.status(500).json({ error: 'Internal Server Error' });
@@ -40,7 +40,7 @@ app.post('/api/notes', (req, res) => {
     return res.status(400).json({ error: 'Title and text are required fields' });
   }
 
-  fs.readFile(path.join(__dirname, 'db.json'), 'utf8', (err, data) => {
+  fs.readFile(path.join(__dirname, '/db/db.json'), 'utf8', (err, data) => {
     if (err) {
       console.error('Error reading db.json file: ', err);
       return res.status(500).json({ error: 'Internal Server Error' });
@@ -55,7 +55,7 @@ app.post('/api/notes', (req, res) => {
 
     notes.push(newNote);
 
-    fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(notes), (err) => {
+    fs.writeFile(path.join(__dirname, '/db/db.json'), JSON.stringify(notes), (err) => {
       if (err) {
         console.error('Error writing to db.json file: ', err);
         return res.status(500).json({ error: 'Internal Server Error' });
